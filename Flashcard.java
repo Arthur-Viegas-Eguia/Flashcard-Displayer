@@ -1,11 +1,15 @@
+/**
+* Models a flashcard containing the front side (question), backside (answer),
+* and priority. It also has methods to get all this information, update the
+* priority and say the order of the instance of the class within a collection
+* of flashcards.
+*/
 public class Flashcard implements Comparable<Flashcard>{
   private Integer priority;
   private String front;
   private String back;
   /**
-   * Creates a new flashcard with the given
-   * priority level, text for the front of the card (front),
-   * and text for the back of the card (back).
+   * Initialized the class.
    */
   public Flashcard(Integer priority, String front, String back){
     this.priority = priority;
@@ -40,7 +44,7 @@ public class Flashcard implements Comparable<Flashcard>{
   /**
    * Compares the priority levels of the current flashcard and another flashcard
    * @param b, a second flashcad, which will be compared to the current flashcard
-   * @return a negative integer if b comes before a, a positive integer if a comes before b, otherwise, it returns 0.
+   * @return a negative integer if b comes before a, a positive integer if a comes before b, 0 if they have the same value.
    */
   public int compareTo(Flashcard b){
     return this.priority.compareTo(b.priority);
