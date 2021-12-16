@@ -1,33 +1,20 @@
 import java.util.*;
 import java.io.*;
 /**
- * Models a studying program with flasshcard. It requires the user to send 
- * their own database with questions, which will be used to test the knowledge
- * of the user. It has methods to continuously show users the front side of a
- * flashcard and asks for answers. If the user answered correctly, the program
- * lets the user know and sets decreases the  prioririty of the question If the
- * user answers incorrectly, the question becomes more important as priority is
- * increasedcAfter the user is done studying for the day, the program saves the
- * flashcard with the updated level for importance in an external text file
+ * Models a studying session with flashcards. The program takes a customized
+ * question bank and asks the questions from it until told it is to stop. The program
+ * autoatically corrects the answers, and updates the priority of the flashcards
+ * based on correct/incorrect answers. The more difficulty an user has in
+ * a question, the more it will be asked. It also saves the flashcards with
+ * their updated priority in the end of the program.
  */
 public class FlashcardDisplayer {
-    /**
-     * cards is the variable which stores the priorityqueue where all the
-     * questions of the dataset are stored. As it is an object of type
-     * FlashcardPQ it has methods to add flashcards, update their priorities
-     * and others.
-     */
     FlashcardPQ cards = new FlashcardPQ();
-    /**
-     * The path to the file containing the questions dataset
-     */
     String fileName;
 
     /**
-     * Creates a FlashcardDisplayer with the flashcards in file. 
-     * File has one flashcard per line. Each line is formatted as:
-     * priority,front,back
-     * @param inputFile The file with the flashcards saved
+     * Constructor of the class.
+     * @param inputFile The file with the flashcards
      */
     public FlashcardDisplayer(String inputFile) {
         fileName = inputFile;
@@ -49,12 +36,9 @@ public class FlashcardDisplayer {
     }
     
     /**
-     * Writes out all flashcards to the same file
-     * they were read from so that they can be loaded by
-     * the FlashcardDisplayer(String file) constructor. 
-     * The FlashcardDisplayer will still have 
-     * all the same flashcards after this method is called 
-     * as it did before the method was called.
+     * Writes out all flashcards to the original file
+     * with their updated priority level after the session.
+     * 
      */
     public void saveFlashcards() {
         try {
@@ -68,11 +52,9 @@ public class FlashcardDisplayer {
     }
 
     /**
-    * Continuously displays flashcards to the user
-    * and checks their answers, updating the priority
-    * of each flashcard based on if the user answered 
-    * correctly or not. Displays the highest priority
-    * flashcard first. Ends when the user enters 'save'.
+    * Continuously asks users questions and corrects
+    * their answers. Updates priority of flashcards 
+    * based on the correctness of the answers/
     */
     public void displayFlashcards(){
         Flashcard currentCard;
@@ -112,12 +94,9 @@ public class FlashcardDisplayer {
         }
     }
     /**
-     * Gets the questions dataset from an external file provided by the user.
-     * Initializes the class, keeps asking the user questions and correcting
-     * their answers until they want to stop studying, then the program will
-     * save the user's progess.
-     * @param args the path to an external text file containing a dataset of
-     * questions.
+     * Receives the question dataset from an external file, asks user questions
+     * until told to stop, and saves progress of studying session.
+     * @param args the path to an external text file containing the question dataset
      */
     public static void main(String[] args) {
         if (args.length == 0) { 
