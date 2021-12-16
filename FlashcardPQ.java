@@ -1,15 +1,11 @@
 import java.util.*;
 
 /**
- * Creates a max heap and imlements a priority queue to store the flashcards.
- * Adds elements to the stack, and removes elements as well, always sorting
- * it when necessary.
+ * Creates a max heap to store flashcards. It has
+ * methods to add, and remoce elements as well as to
+ * sort the heap.
  */
 public class FlashcardPQ implements PriorityQueue<Flashcard> {
-  /**
-   * An object which is an arraylist which stores all the flashcards in data
-   * structure priority queue.
-   */
   private List<Flashcard> heap;
   public FlashcardPQ(){
     heap = new ArrayList<Flashcard>();
@@ -23,20 +19,17 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
   }
   /**
    * returns true is element on position position of the heap is a leaf and
-   * otherwise returns false
+   * false otherwise. 
    * @param position the position of a vertex in the heap
-   * @return true if the element is a leaf on the heap, otherwise it returns false.
+   * @return true if the element is a leaf on the heap; false otherwise.
    */
   public boolean isLeaf(int position){
     return  (position >= getHeapSize()/2) && (position < getHeapSize());
   }
   /**
-   * Returns the postion of the left child of a vertex. The user
-   * Provides the code with an index representing the vertex and the code
-   * returns the position of left child of the node requested or -1 if the node
-   * does not have a left child.
+   * Returns the index of the left child of position.
    * @param position the position of the node requested by the user
-   * @return the position where the left child of the vertex requested is in the heap, or -1 if it does not have  a left child
+   * @return the index where the left child of the vertex requested is, or -1 if it does not have  a left child
    */
   public int getLeftChild(int position){
     if(position >= getHeapSize()/2){
@@ -44,13 +37,10 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     }
     return (2*position + 1);
   }
-  /**
-   * Returns the right child of a vertex which has a certain position. The user
-   * Provides the code with an index representing the vertex and the code
-   * returns the right child of the node requested or null if the node does not
-   * have a right child.
+   /**
+   * Returns the index of the right child of position.
    * @param position the position of the node requested by the user
-   * @return an object of type Flashcard representinf the right child of the vertex requested, or -1 if it does not have  a right child
+   * @return the index where the right child of the vertex requested is, or -1 if it does not have  a right child
    */
   public Flashcard getRightChild(int position){
     if(position >= (getHeapSize()-1)/2){
@@ -59,11 +49,9 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     return heap.get(2*position+2);
   }
   /**
-   * Returns the parent of any given node. The user sends the function an
-   * integer representing the index of a vertex and the function will return
-   * the index of the parent of the node requested, or -1 if it is the root
-   * @param position an integer representing the position of the vertex requested by the user
-   * @return the position of the parent of the vertex requested, or -1 if it was not found, on the root.
+   * Returns the parent of the node. 
+   * @param position the index of the node requested by the user
+   * @return the index of the parent of the node requested, or -1 if it is the root.
    */
   public int getParent(int position){
     if(position <= 0){
@@ -72,10 +60,9 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     return ((position - 1)/2);
   }
   /**
-   * Puts the element of position a in the array in the position b in the array
-   * and puts item of position b in the array into position a of the array
-   * @param a an integer representing the position of a vertex a of a heap, which will go to position b in the heap
-   * @param b an integer representing the position of a vertex b of a heap, which will be swapped to position b in the heap
+   * Swaps positions of elements a and b within the array/
+   * @param a an integer representing the position of a vertex a of a heap, which will go to position b
+   * @param b an integer representing the position of a vertex b of a heap, which will be swapped to position b
    */
   public void swap(int a, int b){
     Flashcard aux = heap.get(a);
@@ -83,11 +70,8 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     heap.set(b, aux);
   }
   /**
-   * Sees if item currentIndex has a greater value than its parent, if so it 
-   * swaps the two elements, in order for the vertex with the highest
-   * prority, if this operation happened the operation is called recursively.
-   * In case the parent element of the vertex has a priority of a larger value
-   * than its children, the function finishes executing.
+   * Sorts currentIndex the heap by putting it closer to the root
+   * if it is larger than its parent value.
    * @param currentIndex an integer representing the index of an element, priority of this element is going to be compared with the priority of the parent of this vertex
    */
   private void heapifyUp(int currentIndex){
@@ -100,12 +84,9 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     }
   }
   /**
-   * Sees if item currentIndex has a smaller value than its children, if so it 
-   * swaps the parent element with its largest child, in order to properly sort
-   * the heap, if this operation happened the operation is called recursively.
-   * In case both children elements of the vertex have a priority of a larger
-   * value than its children, the function finishes executing.
-   * @param currentIndex an integer representing the index of an element, priority of this element is going to be compared with the priority of the children of this vertex
+   * Sorts currentIndex in the heap, putting it down if it is smaller
+   * than children elements.
+   * @param currentIndex an integer representing the index of an element, the priority of this element is going to be used to sort it
    */
   private void heapifyDown(int currentIndex){
     if ((currentIndex < 0) || (currentIndex >= getHeapSize())) {
@@ -121,7 +102,8 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
       currentIndex = j;
     }
   }
-   /** Adds the given item to the heap, and sets it in the correct position
+   /**
+    * Adds the given item to the heap, seting it in its correct position
     * @param item the element to be added to the heap
     */
     public void add(Flashcard item){
@@ -129,9 +111,10 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
       heapifyUp(getHeapSize()- 1);
       
     }
-    /** Removes the first item according to compareTo from the queue, and returns it.
-     * Returns null if the queue is empty.
-     * @return the Flashcard which is in the first position of the heap or null if the heap is empty
+    /** 
+     * Removes and returns the first item of the heap.
+     * Returns null if the heap is empty.
+     * @return the Flashcard which is in the first position of the heap or null if the it is empty
      */
     public Flashcard poll(){
       Flashcard toReturn = heap.get(0);
@@ -144,8 +127,8 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
       return toReturn;
     }
     
-    /** Returns the first item according to compareTo in the queue, without removing it.
-     * Returns null if the queue is empty.
+    /** 
+     * Returns the item on top of the heap, or null if it is empty.
      * @return the item on top of the heap or null if it is empty.
      */
     public Flashcard peek(){
@@ -155,20 +138,23 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
       return heap.get(0);
     }
     
-    /** Returns true if the queue is empty. or false otherwise
-     * @return true if the heap is empty or false otherwise
+    /** 
+     * Returns true if the queue is empty; false otherwise
+     * @return true if the heap is empty; false otherwise
      */
     public boolean isEmpty(){
       return (getHeapSize() == 0);
     }
     
-    /** Removes all items from the queue. */
+    /** 
+    * Removes all items from the queue.
+    */
     public void clear(){
       heap = new ArrayList<Flashcard>();
     }
 
     /**
-     * Creates a String of the priority queue to save to the file in the correct format
+     * Creates a String of the current setup of the priority queue
      * @return a string to save to a file
      */
     public String toString() {
