@@ -1,9 +1,8 @@
 import java.util.*;
 
 /**
- * Creates a max heap to store flashcards. It has
- * methods to add, and remoce elements as well as to
- * sort the heap.
+ * Models a max heap to store flashcards. It has
+ * methods to add, remove and sort elements.
  */
 public class FlashcardPQ implements PriorityQueue<Flashcard> {
   private List<Flashcard> heap;
@@ -18,9 +17,8 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     return heap.size();
   }
   /**
-   * returns true is element on position position of the heap is a leaf and
-   * false otherwise. 
-   * @param position the position of a vertex in the heap
+   * returns true if the element is a leaf on the heap; false otherwise
+   * @param position the index of a vertex in the heap
    * @return true if the element is a leaf on the heap; false otherwise.
    */
   public boolean isLeaf(int position){
@@ -28,8 +26,8 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
   }
   /**
    * Returns the index of the left child of position.
-   * @param position the position of the node requested by the user
-   * @return the index where the left child of the vertex requested is, or -1 if it does not have  a left child
+   * @param position the position of the node
+   * @return the index where the left child of the vertex requested is, or -1 if it does not exist
    */
   public int getLeftChild(int position){
     if(position >= getHeapSize()/2){
@@ -39,8 +37,8 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
   }
    /**
    * Returns the index of the right child of position.
-   * @param position the position of the node requested by the user
-   * @return the index where the right child of the vertex requested is, or -1 if it does not have  a right child
+   * @param position the position of the node
+   * @return the index where the right child of the vertex requested is, or -1 if it does not exist
    */
   public Flashcard getRightChild(int position){
     if(position >= (getHeapSize()-1)/2){
@@ -60,7 +58,7 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
     return ((position - 1)/2);
   }
   /**
-   * Swaps positions of elements a and b within the array/
+   * Swaps positions of elements a and b within the array.
    * @param a an integer representing the position of a vertex a of a heap, which will go to position b
    * @param b an integer representing the position of a vertex b of a heap, which will be swapped to position b
    */
@@ -85,7 +83,7 @@ public class FlashcardPQ implements PriorityQueue<Flashcard> {
   }
   /**
    * Sorts currentIndex in the heap, putting it down if it is smaller
-   * than children elements.
+   * than its children elements.
    * @param currentIndex an integer representing the index of an element, the priority of this element is going to be used to sort it
    */
   private void heapifyDown(int currentIndex){
