@@ -1,5 +1,5 @@
 # Flashcard-Displayer
-Homework developed for Data Structures taught by Anya Vostinar.
+Modified/improved version of homework originally developed for Data Structures taught by Anya Vostinar.
 ## Overview
 The program models a studying session using flashcards. It contniuously asks the user questions, waits for the answers and automatically checks them.
 If the answer is correct the program informs the user and deprioritizes the question, if the answer is incorrect it gets prioritized as the user has difficulties with it.
